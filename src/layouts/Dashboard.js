@@ -2,10 +2,19 @@ import React from 'react'
 import LandingPage from '../pages/LandingPage'
 import ShopsList from '../pages/ShopsList'
 import SingleShop from '../pages/SingleShop'
+import Nav from './Nav'
+import NavWithSearch from './NavWithSearch'
 
 function Dashboard() {
+
+    
+    const path = window.location.pathname;
+    
+    console.log(path)
+
     return (
         <div className="dashboard">
+            {path==="/" ? <Nav/> : <NavWithSearch/>}
             
             {/* <LandingPage/> */}
 

@@ -9,12 +9,40 @@
   max-width: 100%;
   display: flex;
   justify-content: space-around;
+  
+}
 
+.navwithsearch{
+  text-align: center;
+  color: black;
+  margin: 0.4rem;
+  padding-top:1rem ;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-around;
+  
+}
+
+.nav-search-container{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+
+.nav-search-button{
+
+  width: 35%;
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+  justify-content: space-around;
 }
 
 .user-icon{
   margin-left: 35rem !important ;
 }
+
 
 .dashboard{
   z-index: 2;
@@ -34,6 +62,17 @@
 }
 
 @media screen and (max-width: 992px) {
+  .nav-search-button{
+   
+    display: flex;
+    flex-direction: column;
+    
+    
+  }
+
+  .buttonnav{
+    margin-top: 1rem;
+  }
   .dashboard img{
     background-size: cover;
   }
@@ -46,6 +85,37 @@
 }
 
 @media screen and (max-width: 645px) {
+  .nav-search-button{
+   max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+    
+    
+  }
+  .buttonnav{
+    margin-top: 1rem;
+  }
+  .search-stack{
+    width: 300px;
+  }
+  .navwithsearch{
+    max-width: 100%;
+  }
+
+  /*
+   .dashboard{
+    max-width: 100% !important;
+    overflow-y: hidden;
+  }
+  */
+
+  .nav-search-container{
+    max-width: 100%;
+  }
+  .navwithsearch-user-container{
+    display: none;
+  }
   .dashboardimg{
     background: url('https://images.pexels.com/photos/2253643/pexels-photo-2253643.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
   }
@@ -54,6 +124,13 @@
   }
   .user-icon{
     margin-left: 15rem !important ;
+  }
+}
+
+@media screen and (max-width: 376px){
+  .search-stack{
+    width: 200px;
+    background-color: yellow;
   }
 }
 
@@ -74,12 +151,13 @@
   
 }
 
+
 .searchbox{
   color: white !important ;
 }
 
+/*
 .my-button{
   padding-top: 3rem;
 }
-
-
+*/

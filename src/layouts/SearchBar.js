@@ -10,7 +10,7 @@ export default function SearchBar() {
 
    
     return (
-        <Stack spacing={2} sx={{ width: 400 }}>
+        <Stack className="search-stack" spacing={2} >
 
 
         <TextField 

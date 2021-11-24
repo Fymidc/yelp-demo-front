@@ -3,6 +3,9 @@ import SearchBar from '../layouts/SearchBar'
 import MyButton from '../layouts/MyButton'
 
 function LandingPage() {
+
+    const padding="3rem"
+
     return (
         <div className="landing-page" >
             <div className="dashboardimg" ></div>
@@ -11,7 +14,7 @@ function LandingPage() {
             <div className="search-bar" >
                  <SearchBar  />
 
-                <MyButton  />
+                <MyButton padding={padding} />
             </div>
            
 
