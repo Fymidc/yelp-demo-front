@@ -156,6 +156,41 @@
   color: white !important ;
 }
 
+
+/*Single shop*/
+
+.single-shop{
+  margin-top: 3rem;
+  width: 100%;
+  height:400px ;
+ position: relative;
+}
+
+.single-shop-cart{
+  width: 45%;
+  
+  height: 400px;
+  
+  position: absolute;
+  
+  
+}
+.single-shop img{
+  display: inline-flex;
+  width: 33.3%;
+  position: relative;
+  height: 100%;
+  
+}
+
+.single-shop-imgs{
+  z-index: -1;
+  width: 100%;
+  position: absolute;
+ 
+  height: 400px;
+}
+
 /*
 .my-button{
   padding-top: 3rem;

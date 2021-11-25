@@ -18,8 +18,8 @@ function Dashboard() {
             
             {/* <LandingPage/> */}
 
-             <ShopsList /> {/* route ekle /shops da görüntüle get all shops */}
-            {/* <SingleShop/> route ekle /{shopname or id} getid or getbyname */}
+            {/* <ShopsList />  route ekle /shops da görüntüle get all shops */}
+             <SingleShop/> {/*route ekle /{shopname or id} getid or getbyname */}
         </div>
     )
 }

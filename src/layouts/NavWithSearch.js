@@ -12,7 +12,6 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import SearchBar from './SearchBar';
-import { Container } from '@mui/material';
 import MyButton from './MyButton';
 //import Logout from '@material-ui/icons/Logout';
 
@@ -32,7 +31,7 @@ export default function NavWithSearch() {
             <div className="nav-search-container">
                 <div className="nav-search-button" >
                     <SearchNav />
-                    <ButtonNav />
+                    {/* <ButtonNav /> */}
                 </div>
 
                 <div className="navwithsearch-user-container" >
@@ -115,15 +114,6 @@ export default function NavWithSearch() {
     );
 }
 
-function ButtonNav() {
-    return (
-        <div className="buttonnav" >
-           <MyButton /> 
-        </div>
-        
-    )
-
-}
 
 
 function SearchNav() {
