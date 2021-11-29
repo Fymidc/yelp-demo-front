@@ -15,8 +15,6 @@
 .navwithsearch{
   text-align: center;
   color: black;
-  margin: 0.4rem;
-  padding-top:1rem ;
   max-width: 100%;
   display: flex;
   justify-content: space-around;
@@ -24,11 +22,16 @@
 }
 
 .nav-search-container{
+  position: relative;
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
+.navwithsearch-user-container{
+  display: flex;
+  text-align: center;
+}
 
 .nav-search-button{
 
@@ -110,8 +113,19 @@
   }
   */
 
+  .filter-side{
+    display: none;
+  }
+  .shoplist-right-container{
+    display: none;
+  }
+  .brand-logo{
+    display: none;
+  }
+
   .nav-search-container{
     max-width: 100%;
+    margin-top: 2rem;
   }
   .navwithsearch-user-container{
     display: none;

@@ -29,6 +29,11 @@ export default function NavWithSearch() {
     return (
         <div className="navwithsearch" >
             <div className="nav-search-container">
+
+                <div className= "brand-logo" >
+                    <h1 style={{}} >MyCoffee</h1>
+                </div>
+
                 <div className="nav-search-button" >
                     <SearchNav />
                     {/* <ButtonNav /> */}
