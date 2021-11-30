@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -6,6 +6,12 @@ import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
 import FilterSide from '../layouts/FilterSide';
 import { Divider } from '@mui/material';
+import ShopIcon from '@mui/icons-material/Shop';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { getAllCafes, getOneCafeById } from '../actions/cafeActions';
+
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -18,27 +24,40 @@ const Img = styled('img')({
 
 function ShopsList() {
 
+    const state = useSelector(state => state.cafe)
 
-    
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAllCafes());
+    }, [])
 
     //console.log(window.location.pathname)
     return (
-        <div style={{display:"flex" , width:"100%", marginTop: "4.8rem",justifyContent:"space-around"}} >
+        <div style={{ display: "flex", width: "100%", marginTop: "4.8rem", justifyContent: "space-around" }} >
 
-            <div className="filter-side" style={{width:"25%" }} >
+            <div className="filter-side" style={{ width: "20%" }} >
                 <FilterSide />
             </div>
-            
-            <div>
-                <Shops/>
-                <Shops/>
-                <Shops/>
+
+            <div style={{ width: "50%" }} >
+                {state.cafes.map(cafe=>(
+                    <Shops key={cafe.id} id={cafe.id} cafe={cafe} />
+
+                ))}
             </div>
 
-            <div className="shoplist-right-container" style={{width:"25%"}} >
+            <div className="shoplist-right-container" style={{ width: "20%" }} >
                 <Grid item>
                     <Typography variant="subtitle1" component="div">
-                        10/LİKE
+                        Have you had our app on your phone!
+                        Try it for best experience!
+                    </Typography>
+                    <Divider />
+                    <Typography sx={{ fontWeight:"bold", marginTop:"1rem" ,display:"flex",justifyContent:"center" ,textAlign: "center"}} >
+                    Google Play
+                        <ShopIcon color="warning"  sx={{ marginLeft: "1rem" }} />
                     </Typography>
                 </Grid>
             </div>
@@ -49,49 +68,55 @@ function ShopsList() {
 }
 
 
-function Shops(){
+function Shops(props) {
 
-    const handleCafeName = (e) => {
-        console.log("tıkladım", e.currentTarget.textContent)
+    const navigate= useNavigate();
+    const dispatch = useDispatch();
+
+    const handleCafeById = (props) => {
+        dispatch(getOneCafeById(props));
+        navigate("/shops/"+props)
+        console.log("tıkladım", props)
     }
 
-    return(
-        <Paper sx={{ p: 2, padding: "2rem", marginBottom:"2rem",   maxWidth: 600, flexGrow: 1 }}>
-        <Grid container spacing={2}>
-            <Grid item>
-                <ButtonBase sx={{ width: 128, height: 128 }}>
-                    <Img alt="complex" src="https://images.pexels.com/photos/8144690/pexels-photo-8144690.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
-                </ButtonBase>
-            </Grid>
-            <Grid item xs={12} xs container sx={{ textAlign: "left" }} >
-                <Grid item xs container direction="column" spacing={2}>
-                    <Grid item xs>
-                        <Typography onClick={(e) => handleCafeName(e)} sx={{ cursor: 'pointer' }} gutterBottom variant="h5" component="div">
-                            Cafe Name
-                        </Typography>
-                        <Typography sx={{ cursor: 'pointer' }} variant="body2" gutterBottom>
-                            Cafe info-(tea etc.)
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Smal adress info
-                        </Typography>
+
+    return (
+        <Paper  sx={{ overflow:"hidden",p: 2, padding: "1rem", marginBottom: "2rem", Width: 900, flexGrow: 1, height: "210px" }}>
+            <Grid container spacing={2}>
+                <Grid item>
+                    <ButtonBase sx={{ width: 208, height: 208 }}>
+                        <Img alt="complex" src={props.cafe.images[0]} />
+                    </ButtonBase>
+                </Grid>
+                <Grid item xs={12} xs container sx={{ textAlign: "left" }} >
+                    <Grid item xs container direction="column" spacing={2}>
+                        <Grid item xs>
+                            <Typography onClick={() => handleCafeById(props.id)} sx={{ cursor: 'pointer' }} gutterBottom variant="h5" component="div">
+                                {props.cafe.restaurantName}
+                            </Typography>
+                            <Typography sx={{ cursor: 'pointer' }} variant="body2" gutterBottom>
+                                {props.cafe.info}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                {props.cafe.adress}
+                            </Typography>
+                        </Grid>
+                        <Grid item>
+                            <Typography sx={{ cursor: 'pointer' }} variant="body2">
+                                One comment if present or empty
+                            </Typography>
+                        </Grid>
                     </Grid>
                     <Grid item>
-                        <Typography sx={{ cursor: 'pointer' }} variant="body2">
-                            One comment if present or empty
+                        <Typography variant="subtitle1" component="div">
+                            10/LİKE
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid item>
-                    <Typography variant="subtitle1" component="div">
-                        10/LİKE
-                    </Typography>
-                </Grid>
             </Grid>
-        </Grid>
-    </Paper>
+        </Paper>
     )
 }
-
+//https://images.pexels.com/photos/8144690/pexels-photo-8144690.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500
 
 export default ShopsList

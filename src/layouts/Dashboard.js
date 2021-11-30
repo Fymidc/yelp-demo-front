@@ -30,7 +30,7 @@ function Dashboard() {
                     <Route exact path="/shops"
                         element={<ShopsList />}
                     />
-                    <Route exact path="/shops/:name"
+                    <Route exact path="/shops/:id"
                         element={<SingleShop />}
                     />
 

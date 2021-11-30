@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
@@ -13,18 +13,41 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Comment from '../layouts/Comment';
 
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { getOneCafeById } from '../actions/cafeActions';
+
+
+
 function SingleShop() {
+
+    const state = useSelector(state => state.cafe)
+
+    console.log("single den gelen state",state.cafe)
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getOneCafeById());
+    }, [])
+
+
     return (
         <div>
             <div className="single-shop" >
                 <div className="single-shop-imgs">
-                    <img alt="rst" src="https://s3-media0.fl.yelpcdn.com/bphoto/U7O_GUIzkkDmAKN2vBCAgA/l.jpg" />
-                    <img alt="rst" src="https://s3-media0.fl.yelpcdn.com/bphoto/pgKjcSxas0KKfgcGNSGHiQ/l.jpg" />
+                {state.cafe.images ? state.cafe.images.map(i=>(
+                    <img alt="rst" src={i} />
+                    )):""}
                     <img alt="rst" src="https://s3-media0.fl.yelpcdn.com/bphoto/_EbhnDZ86_DodMzY5tXVJg/l.jpg" />
-
+                
+                   {/* <img alt="rst" src="https://s3-media0.fl.yelpcdn.com/bphoto/_EbhnDZ86_DodMzY5tXVJg/l.jpg" />
+  <img alt="rst" src="https://s3-media0.fl.yelpcdn.com/bphoto/U7O_GUIzkkDmAKN2vBCAgA/l.jpg" />
+                    <img alt="rst" src="https://s3-media0.fl.yelpcdn.com/bphoto/pgKjcSxas0KKfgcGNSGHiQ/l.jpg" />
+                    <img alt="rst" src="https://s3-media0.fl.yelpcdn.com/bphoto/_EbhnDZ86_DodMzY5tXVJg/l.jpg" /> */}
                 </div>
                 <div className="single-shop-cart" >
-                    <SingleShopBox />
+                    <SingleShopBox state={state} />
                 </div>
 
             </div>
@@ -45,7 +68,10 @@ function SingleShop() {
                         <Typography sx={{ padding: "1rem" }} >
                             Menu
                         </Typography>
-                        <Button style={{ marginBottom: "1rem", marginRight: "1rem" }} color="warning" startIcon={<LanguageIcon />} variant="outlined">Website Menu</Button>
+                        <Button 
+                        href={state.cafe.menu}
+                         style={{ marginBottom: "1rem", marginRight: "1rem" }} color="warning"
+                          startIcon={<LanguageIcon />} variant="outlined">Website Menu</Button>
                         <Divider variant="middle" />
                     </div>
 
@@ -65,17 +91,17 @@ function SingleShop() {
                     <Card sx={{ border: "1px solid #ebe4c6", maxWidth: 405, textAlign: "left" }}>
                         <CardContent>
                             <Typography sx={{ padding: "1rem", fontSize: 16, position: "relative" }} color="body1" startIcon={<StarIcon />} gutterBottom>
-                                (0212)654 65 65 <CallIcon style={{ right: "0", fontSize: "inherit", position: 'absolute', top: '15px' }} />
+                                {state.cafe.telno} <CallIcon style={{ right: "0", fontSize: "inherit", position: 'absolute', top: '15px' }} />
                             </Typography>
                             <Divider />
                             <Typography sx={{ padding: "1rem", mb: 1.5, position: "relative" }} color="body1"  >
-                                Suadiye Mah. Bağdat Cad. Mücahit Sok. No:5 34732 Istanbul Turkey
+                                {state.cafe.adress}
                                 <DirectionIcon style={{ right: "0", fontSize: "inherit", position: 'absolute', top: '15px' }} />
                             </Typography>
                             <Divider />
                             <Typography sx={{ padding: "1rem", position: "relative" }} variant="body2">
-                                <Link  href="#" underline="none">
-                                    {'http://www.olearys.com.tr'}
+                                <Link href={state.cafe.website} underline="none">
+                                    {state.cafe.website}
                                 </Link>
                                 <LanguageIcon style={{ right: "0", fontSize: "inherit", position: 'absolute', top: '15px' }} />
                             </Typography>
@@ -102,7 +128,8 @@ export default SingleShop
 
 
 
-function SingleShopBox() {
+function SingleShopBox(props) {
+    console.log("props deneme",props.state.cafe)
     return (
         <Paper sx={{ boxShadow: "none", color: "white", backgroundColor: "transparent", p: 2, padding: "2rem", margin: 'auto', marginTop: "11rem", maxWidth: 500, flexGrow: 1 }}>
             <Grid container spacing={2}>
@@ -111,16 +138,16 @@ function SingleShopBox() {
                     <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
                             <Typography sx={{ fontWeight: "bold" }} gutterBottom variant="h3" component="div">
-                                Cafe Name  My Cafe
+                                {props.state.cafe.restaurantName}
                             </Typography>
                             <Typography sx={{ fontWeight: "bold" }} variant="body1" component="div">
                                 10/LİKE
                             </Typography>
                             <Typography sx={{ fontWeight: "bold", cursor: 'pointer' }} variant="body1" gutterBottom>
-                                Cafe info-(tea etc.)
+                                {props.state.cafe.info}
                             </Typography>
                             <Typography sx={{ fontWeight: "bold" }} variant="body1" >
-                                isOpen!
+                                {props.state.cafe.open===true?"Open":"closed"}
                             </Typography>
                         </Grid>
 
