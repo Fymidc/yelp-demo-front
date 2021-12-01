@@ -23,7 +23,7 @@ function SingleShop() {
 
     const state = useSelector(state => state.cafe)
 
-    console.log("single den gelen state",state.cafe)
+    console.log("single den gelen state", state.cafe)
 
     const dispatch = useDispatch();
 
@@ -36,12 +36,12 @@ function SingleShop() {
         <div>
             <div className="single-shop" >
                 <div className="single-shop-imgs">
-                {state.cafe.images ? state.cafe.images.map(i=>(
-                    <img alt="rst" src={i} />
-                    )):""}
+                    {state.cafe.images ? state.cafe.images.map(i => (
+                        <img alt="rst" src={i} />
+                    )) : ""}
                     <img alt="rst" src="https://s3-media0.fl.yelpcdn.com/bphoto/_EbhnDZ86_DodMzY5tXVJg/l.jpg" />
-                
-                   {/* <img alt="rst" src="https://s3-media0.fl.yelpcdn.com/bphoto/_EbhnDZ86_DodMzY5tXVJg/l.jpg" />
+
+                    {/* <img alt="rst" src="https://s3-media0.fl.yelpcdn.com/bphoto/_EbhnDZ86_DodMzY5tXVJg/l.jpg" />
   <img alt="rst" src="https://s3-media0.fl.yelpcdn.com/bphoto/U7O_GUIzkkDmAKN2vBCAgA/l.jpg" />
                     <img alt="rst" src="https://s3-media0.fl.yelpcdn.com/bphoto/pgKjcSxas0KKfgcGNSGHiQ/l.jpg" />
                     <img alt="rst" src="https://s3-media0.fl.yelpcdn.com/bphoto/_EbhnDZ86_DodMzY5tXVJg/l.jpg" /> */}
@@ -63,18 +63,35 @@ function SingleShop() {
 
             <div style={{ marginTop: "2rem", margin: "2rem 5rem", justifyContent: "space-between", height: "50rem", display: "flex" }} >
                 <div style={{ width: "67%" }}>
-                    <div >
-                        <Divider variant="middle" />
-                        <Typography sx={{ padding: "1rem" }} >
-                            Menu
-                        </Typography>
-                        <Button 
-                        href={state.cafe.menu}
-                         style={{ marginBottom: "1rem", marginRight: "1rem" }} color="warning"
-                          startIcon={<LanguageIcon />} variant="outlined">Website Menu</Button>
-                        <Divider variant="middle" />
-                    </div>
+                    <Divider variant="middle" />
+                    <div style={{ display: "flex", justifyContent: "space-around" }} >
 
+
+                        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-around", padding: "0.5rem", width: "40%", }} >
+                            {state.cafe.amenities ? state.cafe.amenities.map(i => (
+                                <b style={{ borderBottom: "1px solid black", width: "30%", margin: "0.5rem" }} variant="body1" >
+                                    {i}
+                                </b>
+                            )) : ""}
+
+                        </div>
+
+                        <div style={{display:"flex",flexDirection:"column",justifyContent:"center"}} >
+                            <Typography sx={{ padding: "1rem" }} >
+                                Menu
+                            </Typography>
+                            <Button
+                                href={state.cafe.menu}
+                                style={{ marginBottom: "1rem", marginRight: "1rem" }} color="warning"
+                                startIcon={<LanguageIcon />} variant="outlined">Website Menu</Button>
+
+                        </div>
+
+
+
+
+                    </div>
+                    <Divider variant="middle" />
 
 
                     <div>
@@ -129,7 +146,7 @@ export default SingleShop
 
 
 function SingleShopBox(props) {
-    console.log("props deneme",props.state.cafe)
+    console.log("props deneme", props.state.cafe)
     return (
         <Paper sx={{ boxShadow: "none", color: "white", backgroundColor: "transparent", p: 2, padding: "2rem", margin: 'auto', marginTop: "11rem", maxWidth: 500, flexGrow: 1 }}>
             <Grid container spacing={2}>
@@ -147,7 +164,7 @@ function SingleShopBox(props) {
                                 {props.state.cafe.info}
                             </Typography>
                             <Typography sx={{ fontWeight: "bold" }} variant="body1" >
-                                {props.state.cafe.open===true?"Open":"closed"}
+                                {props.state.cafe.open === true ? "Open" : "closed"}
                             </Typography>
                         </Grid>
 
