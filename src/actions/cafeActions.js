@@ -18,4 +18,15 @@ export const getOneCafeById=(id)=>async dispatch=>{
     })
 }
 
+export const getCafeNameContains=(input)=>async dispatch=>{
+    const posts = await axios.get(`http://localhost:8080/restaurant/cn/${input}`)
+
+    console.log("contains action",posts.data)
+
+    dispatch({
+        type : "GET_CAFE_CONTAINS",
+        payload : posts.data
+    })
+}
+
 

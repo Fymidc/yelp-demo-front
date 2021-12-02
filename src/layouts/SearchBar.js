@@ -1,54 +1,37 @@
 import  React,{useEffect, useState} from 'react';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
-import MyButton from './MyButton';
 import SearchIcon from '@mui/icons-material/Search'
 import { IconButton, InputAdornment } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllCafes, getOneCafeById } from '../actions/cafeActions';
+import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { getCafeNameContains } from '../actions/cafeActions';
 
-export default function SearchBar() {
-
-
+export default function SearchBar(props) {
+  
   const [input, setinput] = useState("")
-  const [fcafes, setfcafes] = useState([])
-  const state = useSelector(state => state.cafe)
-
-
+ 
+    const navigate= useNavigate();
     const dispatch = useDispatch();
 
-
-
-
-    useEffect(() => {
-        dispatch(getAllCafes());
-    }, [])
 
     const inputHandler=(e)=>{
        setinput(e.target.value)
     }
 
-    console.log("cafe state",state.cafes)
+    
 
     const handleClick=()=>{
-      //console.log("bastım yeni icona")
+      submitHandler();
     }
 
-    const submitHandler=(e)=>{
-     // let ninput =  JSON.stringify(input.toUpperCase());
-      //let ncafes = state.cafes.map(cafe=>cafe.restaurantName.toUpperCase())
-      //console.log("deneme",ncafes[2].includes("VOI CADDE"))
-
-     let deneme=state.cafes.map(c=> 
-       c.restaurantName.includes(input)
-     )
-
-      console.log("submitted")
-      console.log("mapped",deneme)
-      console.log('input',input)
-      console.log("fcafes",fcafes)
-      
+    const submitHandler=()=>{
+    const capitalisedInput= input.toLowerCase().replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase())
+     dispatch(getCafeNameContains(capitalisedInput))
+     navigate("/shops")
     }
+
+  
 
    
     return (
@@ -72,7 +55,7 @@ export default function SearchBar() {
                 endAdornment: (
                     <InputAdornment>
                       <IconButton>
-                        <SearchIcon onClick={()=>handleClick()} />
+                        <SearchIcon onClick={props.handleclick} />
                       </IconButton>
                     </InputAdornment>
                   )

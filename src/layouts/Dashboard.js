@@ -20,9 +20,11 @@ function Dashboard() {
 
     return (
         <div className="dashboard">
-            {path === "/" ? <Nav /> : <NavWithSearch />}
+
+            
 
             <Router>
+            {path === "/" ? <Nav /> : <NavWithSearch />}
                 <Routes>
                     <Route exact path="/"
                         element={<LandingPage />}

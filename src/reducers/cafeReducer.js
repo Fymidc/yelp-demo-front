@@ -16,6 +16,13 @@ export default function cafeReducer(state=initialState,{type,payload}){
                 ...state,
                 cafe:payload
             }
+            
+        case 'GET_CAFE_CONTAINS':
+            return{
+                ...state,
+                cafes:payload
+            }
+
     
         default:
           return{

@@ -9,7 +9,7 @@ import { Divider } from '@mui/material';
 import ShopIcon from '@mui/icons-material/Shop';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { getAllCafes, getOneCafeById } from '../actions/cafeActions';
+import { getAllCafes, getCafeNameContains, getOneCafeById } from '../actions/cafeActions';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -25,15 +25,19 @@ const Img = styled('img')({
 function ShopsList() {
 
     const state = useSelector(state => state.cafe)
-
+    console.log(state.cafes.length)
 
     const dispatch = useDispatch();
 
     useEffect(() => {
+        if(state.cafes.length>=1){
+        return
+    }else if(state.cafes.length==0){
         dispatch(getAllCafes());
-    }, [])
+    }
+    }, [state])
 
-    //console.log(window.location.pathname)
+    //navwith search bar gözükmüyor arama yapıldığında 
     return (
         <div style={{ display: "flex", width: "100%", marginTop: "4.8rem", justifyContent: "space-around" }} >
 
