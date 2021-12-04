@@ -23,11 +23,14 @@ export default function Nav() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const path = window.location.pathname;
+
     return (
         <div className="nav" >
 
 
-            <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+            <Box sx={{ color:path==="/"? "white" : "black", display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                 <Typography sx={{ minWidth: 100 ,cursor:"pointer" }}>Contact</Typography>
                 <Typography sx={{ minWidth: 100 , cursor:"pointer" }}>Profile</Typography>
                 <Tooltip title="Account settings">

@@ -124,7 +124,7 @@ export default function NavWithSearch() {
 function SearchNav() {
     return (
         <div className="searchnav" >
-           <SearchBar /> 
+           <SearchBar  /> 
         </div>
         
     )

@@ -10,18 +10,26 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useSelector } from 'react-redux';
 
 
 
 export default function Comment() {
   
+  const comment = useSelector(state => state.comment)
+
+  console.log("comment",comment.comments)
 
   return (
-    <Card sx={{ maxWidth: "inherit",boxShadow:"none",marginTop:"3rem" }}>
+
+<>
+{comment.comments.map(comment=>(
+      <Card sx={{ maxWidth: "inherit",boxShadow:"none",marginTop:"3rem" }}>
+      
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
+            U
           </Avatar>
         }
         action={
@@ -29,14 +37,12 @@ export default function Comment() {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title={comment.customerName}
+        subheader="created at can be added"
       />
       <CardContent>
         <Typography sx={{textAlign:"left"}} variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the mussels,
-          if you like.
+        {comment.text}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -45,5 +51,8 @@ export default function Comment() {
         </IconButton>
       </CardActions>
     </Card>
+      ))}
+    
+    </>
   );
 }

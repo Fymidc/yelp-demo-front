@@ -12,6 +12,8 @@ import { useDispatch } from 'react-redux';
 import { getAllCafes, getCafeNameContains, getOneCafeById } from '../actions/cafeActions';
 
 import { useNavigate } from 'react-router-dom';
+import NavWithSearch from '../layouts/NavWithSearch';
+import { getAllComments } from '../actions/commentActions';
 
 
 
@@ -30,43 +32,46 @@ function ShopsList() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(state.cafes.length>=1){
-        return
-    }else if(state.cafes.length==0){
-        dispatch(getAllCafes());
-    }
-    }, [state])
 
-    //navwith search bar gözükmüyor arama yapıldığında 
+        if (state.cafes.length === 1) {
+
+        } else if (state.cafes.length === 0) {
+            dispatch(getAllCafes());
+        }
+    }, [state.cafes.length===0])
+
     return (
-        <div style={{ display: "flex", width: "100%", marginTop: "4.8rem", justifyContent: "space-around" }} >
+        <div>
+            <NavWithSearch />
+            <div style={{ display: "flex", width: "100%", marginTop: "4.8rem", justifyContent: "space-around" }} >
 
-            <div className="filter-side" style={{ width: "20%" }} >
-                <FilterSide />
+                <div className="filter-side" style={{ width: "20%" }} >
+                    <FilterSide />
+                </div>
+
+                <div style={{ width: "50%" }} >
+                    {state.cafes.map(cafe => (
+                        <Shops key={cafe.id} id={cafe.id} cafe={cafe} />
+
+                    ))}
+                </div>
+
+                <div className="shoplist-right-container" style={{ width: "20%" }} >
+                    <Grid item>
+                        <Typography variant="subtitle1" component="div">
+                            Have you had our app on your phone!
+                            Try it for best experience!
+                        </Typography>
+                        <Divider />
+                        <Typography sx={{ fontWeight: "bold", marginTop: "1rem", display: "flex", justifyContent: "center", textAlign: "center" }} >
+                            Google Play
+                            <ShopIcon color="warning" sx={{ marginLeft: "1rem" }} />
+                        </Typography>
+                    </Grid>
+                </div>
+
+
             </div>
-
-            <div style={{ width: "50%" }} >
-                {state.cafes.map(cafe=>(
-                    <Shops key={cafe.id} id={cafe.id} cafe={cafe} />
-
-                ))}
-            </div>
-
-            <div className="shoplist-right-container" style={{ width: "20%" }} >
-                <Grid item>
-                    <Typography variant="subtitle1" component="div">
-                        Have you had our app on your phone!
-                        Try it for best experience!
-                    </Typography>
-                    <Divider />
-                    <Typography sx={{ fontWeight:"bold", marginTop:"1rem" ,display:"flex",justifyContent:"center" ,textAlign: "center"}} >
-                    Google Play
-                        <ShopIcon color="warning"  sx={{ marginLeft: "1rem" }} />
-                    </Typography>
-                </Grid>
-            </div>
-
-
         </div>
     )
 }
@@ -74,18 +79,19 @@ function ShopsList() {
 
 function Shops(props) {
 
-    const navigate= useNavigate();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const handleCafeById = (props) => {
         dispatch(getOneCafeById(props));
-        navigate("/shops/"+props)
+        dispatch(getAllComments(props));
+        navigate("/shops/" + props)
         console.log("tıkladım", props)
     }
 
 
     return (
-        <Paper  sx={{ overflow:"hidden",p: 2, padding: "1rem", marginBottom: "2rem", Width: 900, flexGrow: 1, height: "210px" }}>
+        <Paper sx={{ overflow: "hidden", p: 2, padding: "1rem", marginBottom: "2rem", Width: 900, flexGrow: 1, height: "210px" }}>
             <Grid container spacing={2}>
                 <Grid item>
                     <ButtonBase sx={{ width: 208, height: 208 }}>

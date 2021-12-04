@@ -16,6 +16,7 @@ import Comment from '../layouts/Comment';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { getOneCafeById } from '../actions/cafeActions';
+import Nav from '../layouts/Nav';
 
 
 
@@ -23,7 +24,6 @@ function SingleShop() {
 
     const state = useSelector(state => state.cafe)
 
-    console.log("single den gelen state", state.cafe)
 
     const dispatch = useDispatch();
 
@@ -31,9 +31,17 @@ function SingleShop() {
         dispatch(getOneCafeById());
     }, [])
 
+    //write review tıklanınca comment create çağırılacak
+    //like render edilecek
+    //like create oluşturulacak
+    
 
     return (
         <div>
+            <div style={{marginTop:"1rem"}}>
+              <Nav/>  
+            </div>
+            
             <div className="single-shop" >
                 <div className="single-shop-imgs">
                     {state.cafe.images ? state.cafe.images.map(i => (
@@ -97,8 +105,6 @@ function SingleShop() {
                     <div>
                         <Comment />
                         <Divider />
-                        <Comment />
-                        <Divider />
                     </div>
 
 
@@ -146,7 +152,6 @@ export default SingleShop
 
 
 function SingleShopBox(props) {
-    console.log("props deneme", props.state.cafe)
     return (
         <Paper sx={{ boxShadow: "none", color: "white", backgroundColor: "transparent", p: 2, padding: "2rem", margin: 'auto', marginTop: "11rem", maxWidth: 500, flexGrow: 1 }}>
             <Grid container spacing={2}>

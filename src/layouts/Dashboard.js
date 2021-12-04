@@ -8,23 +8,21 @@ import {
     BrowserRouter as Router,
     Routes,
     Route,
+
     Link
 } from "react-router-dom";
+
 
 function Dashboard() {
 
 
-    const path = window.location.pathname;
 
-    console.log(path)
+
+    // console.log(path)
 
     return (
         <div className="dashboard">
-
-            
-
             <Router>
-            {path === "/" ? <Nav /> : <NavWithSearch />}
                 <Routes>
                     <Route exact path="/"
                         element={<LandingPage />}
@@ -35,7 +33,6 @@ function Dashboard() {
                     <Route exact path="/shops/:id"
                         element={<SingleShop />}
                     />
-
                 </Routes>
             </Router>
             {/* <LandingPage/> */}
