@@ -17,6 +17,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { getOneCafeById } from '../actions/cafeActions';
 import Nav from '../layouts/Nav';
+import CommentModal from '../layouts/CommentModal';
 
 
 
@@ -30,6 +31,10 @@ function SingleShop() {
     useEffect(() => {
         dispatch(getOneCafeById());
     }, [])
+
+    const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
     //write review tıklanınca comment create çağırılacak
     //like render edilecek
@@ -62,7 +67,7 @@ function SingleShop() {
 
             <div >
                 <div style={{ marginLeft: "5rem", textAlign: "left" }} >
-                    <Button style={{ marginTop: "1rem", marginRight: "1rem" }} color="warning" startIcon={<StarIcon />} variant="outlined">Write a Review</Button>
+                    <Button style={{ marginTop: "1rem", marginRight: "1rem" }} color="warning" startIcon={<StarIcon />} onClick={()=>handleOpen()} variant="outlined">Write a Review</Button>
                     <Button style={{ marginTop: "1rem", marginRight: "1rem" }} color="warning" startIcon={<LikeIcon />} variant="outlined">Like</Button>
                     <Button style={{ marginTop: "1rem", marginRight: "1rem" }} color="warning" startIcon={<BookmarkIcon />} variant="outlined">Save</Button>
 
@@ -105,6 +110,7 @@ function SingleShop() {
                     <div>
                         <Comment />
                         <Divider />
+                        <CommentModal handleClose={handleClose} open={open} />
                     </div>
 
 
