@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
-import { Divider, TextField, Typography } from '@mui/material';
+import { Divider, Input } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { Field, Form, Formik } from 'formik';
 
@@ -69,9 +69,11 @@ function CommentModal(props) {
                              name="text"
                              style={{color: "red"}}
                              variant="standard" 
-                             render={({field})=><TextField {...field} />}
+                             render={({field})=><Input {...field} placeholder="write a review" />}
                              onChange={(e)=>inputHandler(e)}
-                              placeholder="write a review" />
+                             
+                             
+                               />
 
                             <Divider sx={{ margin: "1rem" }} />
                             <Button color="warning" startIcon={<SendIcon />} variant="outlined" type="submit" >Send</Button>

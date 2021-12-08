@@ -1,6 +1,7 @@
 const initialState={
     cafes:[],
     cafe:[],
+    
 }
 
 export default function cafeReducer(state=initialState,{type,payload}){
@@ -21,6 +22,18 @@ export default function cafeReducer(state=initialState,{type,payload}){
             return{
                 ...state,
                 cafes:payload
+            }
+        case 'GET_FILTERED_CAFE':
+    
+            let restaurant=state.cafes.filter(z=> z.info.some(c=>c==="Restaurant"))
+            console.log(restaurant)
+                if(restaurant){
+                    return{...state,cafes:restaurant}
+                }
+            return{
+                ...state,
+                cafes:[]
+                
             }
 
     

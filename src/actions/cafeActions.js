@@ -5,7 +5,17 @@ export const getAllCafes=()=>async dispatch=>{
 
     dispatch({
         type : "GET_ALL_CAFE",
-        payload : posts.data
+        payload :posts.data
+    })
+}
+
+export const getCheckedCafes=()=>async dispatch=>{
+    const posts = await axios.get("http://localhost:8080/restaurant")
+    
+   // console.log("actiondan gelen checked: ",ischecked)
+    dispatch({
+        type : "GET_FILTERED_CAFE",
+        payload :posts.data
     })
 }
 

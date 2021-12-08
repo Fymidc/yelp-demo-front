@@ -6,9 +6,24 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { Switch } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { getAllCafes, getCheckedCafes } from '../actions/cafeActions';
 
 export default function FilterSide() {
+  
+  const dispatch = useDispatch()
  
+  const handleChecked=(e)=>{
+    console.log("check kontrol",e.target.checked)
+    if(e.target.checked){
+
+      dispatch(getCheckedCafes())
+    }else{
+      dispatch(getAllCafes())
+    }
+
+  }
+
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -45,6 +60,7 @@ export default function FilterSide() {
             label="Cafes"
           />
           <FormControlLabel
+          onChange={(e)=>handleChecked(e)}
             control={
               <Switch  name="Restaurant" />
             }

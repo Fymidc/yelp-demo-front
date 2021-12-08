@@ -29,16 +29,21 @@ function ShopsList() {
     const state = useSelector(state => state.cafe)
     console.log(state.cafes.length)
 
+    //const infos = state.cafes.filter(z=> z.info.some(c=>c==="Restaurant"))
     const dispatch = useDispatch();
+
+    //console.log("info: ",infos)
+    // console.log("deneme",state.cafes.map((x)=>x.info.map((x)=>{return !!x=="Cafes"}) ))
 
     useEffect(() => {
 
         if (state.cafes.length === 1) {
 
         } else if (state.cafes.length === 0) {
-            dispatch(getAllCafes());
+            // dispatch(getAllCafes());
+            
         }
-    }, [state.cafes.length===0])
+    }, [state.cafes.length === 0])
 
     return (
         <div>
@@ -50,10 +55,13 @@ function ShopsList() {
                 </div>
 
                 <div style={{ width: "50%" }} >
-                    {state.cafes.map(cafe => (
+
+
+                    {state.cafes.length > 0 ? state.cafes.map(cafe => (
                         <Shops key={cafe.id} id={cafe.id} cafe={cafe} />
 
-                    ))}
+                    )) : (<div> No result found </div>)}
+
                 </div>
 
                 <div className="shoplist-right-container" style={{ width: "20%" }} >
@@ -95,7 +103,7 @@ function Shops(props) {
             <Grid container spacing={2}>
                 <Grid item>
                     <ButtonBase sx={{ width: 208, height: 208 }}>
-                        <Img alt="complex" src={props.cafe.images[0]} />
+                        <Img alt="complex" src={props.cafe.images ? props.cafe.images[0] : ""} />
                     </ButtonBase>
                 </Grid>
                 <Grid item xs={12} xs container sx={{ textAlign: "left" }} >
