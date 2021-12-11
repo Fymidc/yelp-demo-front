@@ -1,14 +1,38 @@
 import React from 'react'
 import ListItemIcon from '@mui/material/ListItemIcon';
+import UpdateModal from './UpdateModal'
 
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
 import { Menu, MenuItem } from '@mui/material';
 
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteComment } from '../actions/commentActions';
+
 function DropdownMenu(props) {
-    return (
-        <Menu
+  const [nopen, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const state = useSelector(state => state.comment)
+
+  const dispatch = useDispatch()
+
+  const handleDelete=()=>{
+    const id=props.data.id
+    dispatch(deleteComment(id))
+    
+  }
+
+ 
+  
+
+
+  return (
+    <>
+      <UpdateModal handleClose={handleClose} comment={props.data} open={nopen} />
+
+      <Menu
         anchorEl={props.anchorEl}
         open={props.open}
         onClose={props.handleClose}
@@ -44,26 +68,23 @@ function DropdownMenu(props) {
       >
 
 
-        <MenuItem>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
+        <MenuItem onClick={()=>handleOpen()} >
+          <ListItemIcon >
+            <EditIcon  fontSize="small" />
           </ListItemIcon>
-          Add another account
+          Edit
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={()=>handleDelete()} >
           <ListItemIcon>
-            <Settings fontSize="small" />
+            <DeleteIcon fontSize="small" />
           </ListItemIcon>
-          Settings
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
+          Delete
         </MenuItem>
       </Menu>
-    )
+
+    </>
+
+  )
 }
 
 export default DropdownMenu

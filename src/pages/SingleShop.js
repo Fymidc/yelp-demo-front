@@ -36,9 +36,10 @@ function SingleShop() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-    //write review tıklanınca comment create çağırılacak
-    //like render edilecek
-    //like create oluşturulacak
+    //like create ve delete yap
+    //sign in ve sign up modal oluştur
+    //spring secde user auth ile login ve log out ol
+    //jwt token ile auth uygula
     
 
     return (

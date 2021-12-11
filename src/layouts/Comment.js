@@ -25,10 +25,18 @@ export default function Comment() {
   const comment = useSelector(state => state.comment)
 
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [edited, setedited] = React.useState("")
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
+  const handleClick = (event,id) => {
     setAnchorEl(event.currentTarget);
+    console.log("event",event)
+    setedited(id)
+    
+   
   };
+
+  console.log("state: ",edited)
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -37,8 +45,9 @@ export default function Comment() {
   return (
 
     <>
-      {comment.comments.map(comment => (
-        <Card sx={{ maxWidth: "inherit", boxShadow: "none", marginTop: "3rem" }}>
+      {comment.comments.map(data => (
+        
+        <Card key={data.id} sx={{ maxWidth: "inherit", boxShadow: "none", marginTop: "3rem" }}>
 
           <CardHeader
             avatar={
@@ -47,20 +56,19 @@ export default function Comment() {
               </Avatar>
             }
             action={
-              <IconButton onClick={handleClick} aria-label="settings">
+              <IconButton onClick={(e)=>handleClick(e,data)}  aria-label="settings">
 
                 <MoreVertIcon />
               </IconButton>
             }
-            title={comment.customerName}
+            title={data.customerName}
             subheader="created at can be added"
           />
 
-          <DropdownMenu open={open} handleClose={handleClose} anchorEl={anchorEl} />
 
           <CardContent>
             <Typography sx={{ textAlign: "left" }} variant="body2" color="text.secondary">
-              {comment.text}
+              {data.text}
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
@@ -68,6 +76,9 @@ export default function Comment() {
               <FavoriteIcon />
             </IconButton>
           </CardActions>
+
+          <DropdownMenu open={open} data={edited} handleClose={handleClose} anchorEl={anchorEl} />
+
         </Card>
       ))}
 

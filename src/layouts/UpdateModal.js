@@ -5,9 +5,9 @@ import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
 import { Divider, Input } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Field, Form, Formik } from 'formik';
-import { createComment } from '../actions/commentActions';
+import { editComment } from '../actions/commentActions';
 
 
 const style = {
@@ -25,19 +25,17 @@ const style = {
 function CommentModal(props) {
 
     const [input, setinput] = useState("")
-
-    const state = useSelector(state => state.cafe)
+    
 
     const inputHandler=(e)=>{
         setinput(e.target.value)
         
     }
 
-    const initialValues = {
     
-        text: "",
-        customerid: 1,
-        restaurantid: state.cafe.id
+
+    const initialValues = {
+        text: props.comment.text,
     }
 
     console.log(input)
@@ -45,9 +43,9 @@ function CommentModal(props) {
     const dispatch = useDispatch();
 
     const submitComment = (val) => {
-        
+        const id = props.comment.id
         console.log(val)
-        dispatch(createComment(val))
+        dispatch(editComment(val,id))
         props.handleClose();
     }
     return (
@@ -73,14 +71,14 @@ function CommentModal(props) {
                              name="text"
                              style={{color: "red"}}
                              variant="standard" 
-                             render={({field})=><Input {...field} placeholder="write a review" defaultValue ={props.text}/>}
+                             render={({field})=><Input {...field} />}
                              onChange={(e)=>inputHandler(e)}
                              
                              
                                />
 
                             <Divider sx={{ margin: "1rem" }} />
-                            <Button color="warning" startIcon={<SendIcon />} variant="outlined" type="submit" >Send</Button>
+                            <Button color="warning" startIcon={<SendIcon />} variant="outlined" type="submit" >Edit</Button>
                             <Button sx={{ marginLeft: "1rem" }} color="warning" startIcon={<CloseIcon />} variant="outlined" onClick={() => props.handleClose()} >Cancel</Button>
 
                         </Form>
@@ -95,7 +93,3 @@ function CommentModal(props) {
 }
 
 export default CommentModal
-
-// <Button style={{ marginTop: "1rem", marginRight: "1rem" }} color="warning" startIcon={<SendIcon />} variant="outlined">Send</Button>
-//         <Button style={{ marginTop: "1rem", marginRight: "1rem" }} color="warning" startIcon={<CloseIcon />} variant="outlined">Cancel</Button>
-//         <TextField id="standard-basic" label="Standard" variant="Write a review..." />
