@@ -6,6 +6,7 @@ import { Button, Divider, Link } from '@mui/material';
 import StarIcon from '@mui/icons-material/StarBorderOutlined';
 import LikeIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import BookmarkIcon from '@mui/icons-material/BookmarkBorderOutlined';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import CallIcon from '@mui/icons-material/CallEndOutlined';
 import DirectionIcon from '@mui/icons-material/DirectionsOutlined';
 import LanguageIcon from '@mui/icons-material/LanguageOutlined';
@@ -18,23 +19,52 @@ import { useDispatch } from 'react-redux';
 import { getOneCafeById } from '../actions/cafeActions';
 import Nav from '../layouts/Nav';
 import CommentModal from '../layouts/CommentModal';
+import { createLike, deleteLike, getAllLikes, getCustomerLikes } from '../actions/likeActions';
 
 
 
 function SingleShop() {
 
-    const state = useSelector(state => state.cafe)
+    
 
+    const state = useSelector(state => state.cafe)
+    const lstate = useSelector(state => state.like)
+    const ustate = useSelector(state => state.user)
 
     const dispatch = useDispatch();
 
     useEffect(() => {
+        const customerid = ustate.user.id
+        const restaurantid = state.cafe.id
+        dispatch(getCustomerLikes(customerid,restaurantid))
         dispatch(getOneCafeById());
-    }, [])
+        
+    }, [lstate.clikes.length,lstate.likes])
+
 
     const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleLike=()=>{
+      const [id] = lstate.clikes.slice(-1);
+        const customerid = ustate.user.id
+        const restaurantid = state.cafe.id
+    //   if(lstate.clikes.map(x=>x.customerId ===customerid)){
+    //      dispatch(deleteLike(likeid))
+    //   }else{
+    //       dispatch(createLike(customerid,restaurantid))
+    //   }
+
+      if(lstate.clikes.length===0){
+        dispatch(createLike(customerid,restaurantid))
+
+      }else{
+        dispatch(deleteLike(id.id))
+      }
+
+      
+  }
 
     //like create ve delete yap
     //sign in ve sign up modal oluştur
@@ -69,7 +99,11 @@ function SingleShop() {
             <div >
                 <div style={{ marginLeft: "5rem", textAlign: "left" }} >
                     <Button style={{ marginTop: "1rem", marginRight: "1rem" }} color="warning" startIcon={<StarIcon />} onClick={()=>handleOpen()} variant="outlined">Write a Review</Button>
-                    <Button style={{ marginTop: "1rem", marginRight: "1rem" }} color="warning" startIcon={<LikeIcon />} variant="outlined">Like</Button>
+                    <Button style={{ marginTop: "1rem", marginRight: "1rem" }} color="warning" startIcon={<LikeIcon />} 
+                    variant={lstate.clikes.find(x=>x.customerId ===ustate.user.id) ? "contained":"outlined"}
+                    onClick={()=>handleLike()}
+                    >Like</Button>
+
                     <Button style={{ marginTop: "1rem", marginRight: "1rem" }} color="warning" startIcon={<BookmarkIcon />} variant="outlined">Save</Button>
 
                 </div>
@@ -159,6 +193,19 @@ export default SingleShop
 
 
 function SingleShopBox(props) {
+
+    const cstate = useSelector(state => state.cafe)
+    const state = useSelector(state => state.like)
+    console.log(state.likes.length)
+
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const id = cstate.cafe.id
+        dispatch(getAllLikes(id))
+    }, [state.likes.length])
+
     return (
         <Paper sx={{ boxShadow: "none", color: "white", backgroundColor: "transparent", p: 2, padding: "2rem", margin: 'auto', marginTop: "11rem", maxWidth: 500, flexGrow: 1 }}>
             <Grid container spacing={2}>
@@ -170,7 +217,7 @@ function SingleShopBox(props) {
                                 {props.state.cafe.restaurantName}
                             </Typography>
                             <Typography sx={{ fontWeight: "bold" }} variant="body1" component="div">
-                                10/LİKE
+                                {state.likes.length} <FavoriteBorderIcon style={{position:"absolute",marginLeft:"0.5rem",color:"red"}} />
                             </Typography>
                             <Typography sx={{ fontWeight: "bold", cursor: 'pointer' }} variant="body1" gutterBottom>
                                 {props.state.cafe.info}

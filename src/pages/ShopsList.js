@@ -14,6 +14,7 @@ import { getAllCafes, getCafeNameContains, getOneCafeById } from '../actions/caf
 import { useNavigate } from 'react-router-dom';
 import NavWithSearch from '../layouts/NavWithSearch';
 import { getAllComments } from '../actions/commentActions';
+import { getAllLikes } from '../actions/likeActions';
 
 
 
@@ -27,13 +28,12 @@ const Img = styled('img')({
 function ShopsList() {
 
     const state = useSelector(state => state.cafe)
-    console.log(state.cafes.length)
+   
 
-    //const infos = state.cafes.filter(z=> z.info.some(c=>c==="Restaurant"))
+
     const dispatch = useDispatch();
 
-    //console.log("info: ",infos)
-    // console.log("deneme",state.cafes.map((x)=>x.info.map((x)=>{return !!x=="Cafes"}) ))
+   
 
     useEffect(() => {
 
@@ -93,6 +93,7 @@ function Shops(props) {
     const handleCafeById = (props) => {
         dispatch(getOneCafeById(props));
         dispatch(getAllComments(props));
+        dispatch(getAllLikes(props));
         navigate("/shops/" + props)
         console.log("tıkladım", props)
     }
