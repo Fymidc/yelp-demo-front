@@ -11,6 +11,8 @@ import {
 
     Link
 } from "react-router-dom";
+import LogInPage from '../pages/LogInPage'
+import SignUpPage from '../pages/SignUpPage'
 
 
 function Dashboard() {
@@ -26,6 +28,12 @@ function Dashboard() {
                 <Routes>
                     <Route exact path="/"
                         element={<LandingPage />}
+                    />
+                    <Route exact path="/login"
+                        element={<LogInPage />}
+                    />
+                    <Route exact path="/signup"
+                        element={<SignUpPage />}
                     />
                     <Route exact path="/shops"
                         element={<ShopsList />}

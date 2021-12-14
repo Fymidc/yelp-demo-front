@@ -87,6 +87,8 @@ function ShopsList() {
 
 function Shops(props) {
 
+   
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -97,6 +99,8 @@ function Shops(props) {
         navigate("/shops/" + props)
         console.log("tıkladım", props)
     }
+
+   
 
 
     return (

@@ -50,11 +50,7 @@ function SingleShop() {
       const [id] = lstate.clikes.slice(-1);
         const customerid = ustate.user.id
         const restaurantid = state.cafe.id
-    //   if(lstate.clikes.map(x=>x.customerId ===customerid)){
-    //      dispatch(deleteLike(likeid))
-    //   }else{
-    //       dispatch(createLike(customerid,restaurantid))
-    //   }
+   
 
       if(lstate.clikes.length===0){
         dispatch(createLike(customerid,restaurantid))
@@ -66,8 +62,6 @@ function SingleShop() {
       
   }
 
-    //like create ve delete yap
-    //sign in ve sign up modal oluştur
     //spring secde user auth ile login ve log out ol
     //jwt token ile auth uygula
     
