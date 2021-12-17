@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Box, Button,  Divider,  Input,  InputAdornment,  TextField,  Typography } from '@mui/material'
 import { Field, Form, Formik } from 'formik'
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { useNavigate } from 'react-router-dom';
 
 
 const style = {
@@ -20,6 +21,8 @@ function SignUpPage() {
     const [input, setinput] = useState("")
     const [visible, setvisible] = useState(false)
 
+    const navigate = useNavigate()
+
     const inputHandler = (e) => {
         setinput(e.target.value)
 
@@ -31,9 +34,11 @@ function SignUpPage() {
         password: "",
     }
 
-    const submitComment = (val) => {
+    const submitRegister = (val) => {
 
         console.log("sign up ", val)
+
+        navigate("/login")
 
     }
 
@@ -57,7 +62,7 @@ function SignUpPage() {
                 <Formik
                     initialValues={initialValues}
                     onSubmit={(values) => {
-                        submitComment(values)
+                        submitRegister(values)
                     }}
 
                 >

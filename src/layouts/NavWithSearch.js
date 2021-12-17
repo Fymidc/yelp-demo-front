@@ -21,7 +21,6 @@ import { useNavigate } from 'react-router-dom';
 
 export default function NavWithSearch() {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const [islogin, setislogin] = React.useState(false);
 
     const navigate = useNavigate();
 
@@ -35,7 +34,11 @@ export default function NavWithSearch() {
 
     
     const handleLogout=()=>{
-        setislogin(false)
+        
+        localStorage.removeItem("tokenKey")
+        localStorage.removeItem("currenUser")
+        localStorage.removeItem("userName")
+        navigate(0);
     }
 
     const handleSignUp=()=>{
@@ -71,7 +74,7 @@ export default function NavWithSearch() {
                         </Tooltip>
                     </Box>
 
-                    {islogin ? <Loggedin anchorEl={anchorEl} handleClose={handleClose} open={open} handleLogout={handleLogout} /> :
+                    {localStorage.getItem("currenUser") !=null ? <Loggedin anchorEl={anchorEl} handleClose={handleClose} open={open} handleLogout={handleLogout} /> :
             <LoggedOut  anchorEl={anchorEl} handleClose={handleClose} open={open} handleSignUp={handleSignUp} handleLogin={handleLogin} />    
              }
 

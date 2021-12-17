@@ -2,6 +2,9 @@ import { Box, Button, Checkbox, Divider, FormControlLabel, Input, InputAdornment
 import { Field, Form, Formik } from 'formik'
 import React, { useState } from 'react'
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../actions/userActions';
+import { useNavigate } from 'react-router-dom';
 
 
 const style = {
@@ -21,6 +24,8 @@ function LogInPage() {
     const [input, setinput] = useState("")
     const [visible, setvisible] = useState(false)
 
+    const navigate = useNavigate();
+
     const inputHandler = (e) => {
         setinput(e.target.value)
 
@@ -31,9 +36,13 @@ function LogInPage() {
         password: "",
     }
 
-    const submitComment = (val) => {
+    const dispatch = useDispatch()
 
-        console.log("submited ", val)
+    const submitLogin = (val) => {
+
+        dispatch(loginUser(val));
+
+        navigate(-1);
 
     }
 
@@ -57,7 +66,7 @@ function LogInPage() {
                 <Formik
                     initialValues={initialValues}
                     onSubmit={(values) => {
-                        submitComment(values)
+                        submitLogin(values)
                     }}
 
                 >

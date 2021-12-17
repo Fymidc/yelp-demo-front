@@ -48,7 +48,7 @@ function SingleShop() {
 
   const handleLike=()=>{
       const [id] = lstate.clikes.slice(-1);
-        const customerid = ustate.user.id
+        const customerid = localStorage.getItem("currenUser")
         const restaurantid = state.cafe.id
    
 
@@ -62,8 +62,9 @@ function SingleShop() {
       
   }
 
-    //spring secde user auth ile login ve log out ol
-    //jwt token ile auth uygula
+  //like post yapıldı sadece--
+  //post requestlere authorize token ekle ve post isteği yap
+  
     
 
     return (

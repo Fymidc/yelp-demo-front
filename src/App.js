@@ -11,10 +11,13 @@ function App() {
   const state = useSelector(state => state.cafe)
   const dispatch = useDispatch();
 
+  const userid= localStorage.getItem("currenUser");
+
   useEffect(() => {
     dispatch(getAllCafes());
-    dispatch(getOneUser())
+    dispatch(getOneUser(userid))
   }, [])
+
 
   return (
     <div className="App">

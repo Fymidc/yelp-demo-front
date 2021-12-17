@@ -19,7 +19,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Nav() {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const [islogin, setislogin] = React.useState(false);
+    
 
     const navigate = useNavigate();
 
@@ -34,7 +34,11 @@ export default function Nav() {
     const path = window.location.pathname;
 
     const handleLogout=()=>{
-        setislogin(false)
+        
+        localStorage.removeItem("tokenKey")
+        localStorage.removeItem("currenUser")
+        localStorage.removeItem("userName")
+        navigate(0);
     }
 
     const handleSignUp=()=>{
@@ -62,7 +66,7 @@ export default function Nav() {
             </Box>
 
 
-            {islogin ? <Loggedin anchorEl={anchorEl} handleClose={handleClose} open={open} handleLogout={handleLogout} /> :
+            {localStorage.getItem("currenUser") !=null ? <Loggedin anchorEl={anchorEl} handleClose={handleClose} open={open} handleLogout={handleLogout} /> :
             <LoggedOut  anchorEl={anchorEl} handleClose={handleClose} open={open} handleSignUp={handleSignUp} handleLogin={handleLogin} />    
              }
             

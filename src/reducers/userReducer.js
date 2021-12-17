@@ -1,5 +1,4 @@
 const initialState ={
-    
     user : []
 
 }
@@ -12,7 +11,7 @@ export default function cartReducer(state=initialState,{type,payload}){
                 
                 user:payload
             }
-            
+
     
         default:
            return state
