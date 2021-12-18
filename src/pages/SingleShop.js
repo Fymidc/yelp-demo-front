@@ -20,6 +20,7 @@ import { getOneCafeById } from '../actions/cafeActions';
 import Nav from '../layouts/Nav';
 import CommentModal from '../layouts/CommentModal';
 import { createLike, deleteLike, getAllLikes, getCustomerLikes } from '../actions/likeActions';
+import { getAllComments } from '../actions/commentActions';
 
 
 
@@ -30,15 +31,18 @@ function SingleShop() {
     const state = useSelector(state => state.cafe)
     const lstate = useSelector(state => state.like)
     const ustate = useSelector(state => state.user)
+    const comment = useSelector(state => state.comment)
+
 
     const dispatch = useDispatch();
 
+    const customerid = ustate.user.id
+    const restaurantid = state.cafe.id
+
     useEffect(() => {
-        const customerid = ustate.user.id
-        const restaurantid = state.cafe.id
+        
         dispatch(getCustomerLikes(customerid,restaurantid))
         dispatch(getOneCafeById());
-        
     }, [lstate.clikes.length,lstate.likes])
 
 
@@ -62,8 +66,8 @@ function SingleShop() {
       
   }
 
-  //like post yapıldı sadece--
-  //post requestlere authorize token ekle ve post isteği yap
+  //un auth iken comment create button açılmasın login page yönlendir
+  //un auth iken like atılmasın /login page yönlendir
   
     
 
@@ -78,12 +82,6 @@ function SingleShop() {
                     {state.cafe.images ? state.cafe.images.map(i => (
                         <img alt="rst" src={i} />
                     )) : ""}
-                    <img alt="rst" src="https://s3-media0.fl.yelpcdn.com/bphoto/_EbhnDZ86_DodMzY5tXVJg/l.jpg" />
-
-                    {/* <img alt="rst" src="https://s3-media0.fl.yelpcdn.com/bphoto/_EbhnDZ86_DodMzY5tXVJg/l.jpg" />
-  <img alt="rst" src="https://s3-media0.fl.yelpcdn.com/bphoto/U7O_GUIzkkDmAKN2vBCAgA/l.jpg" />
-                    <img alt="rst" src="https://s3-media0.fl.yelpcdn.com/bphoto/pgKjcSxas0KKfgcGNSGHiQ/l.jpg" />
-                    <img alt="rst" src="https://s3-media0.fl.yelpcdn.com/bphoto/_EbhnDZ86_DodMzY5tXVJg/l.jpg" /> */}
                 </div>
                 <div className="single-shop-cart" >
                     <SingleShopBox state={state} />
@@ -95,7 +93,7 @@ function SingleShop() {
                 <div style={{ marginLeft: "5rem", textAlign: "left" }} >
                     <Button style={{ marginTop: "1rem", marginRight: "1rem" }} color="warning" startIcon={<StarIcon />} onClick={()=>handleOpen()} variant="outlined">Write a Review</Button>
                     <Button style={{ marginTop: "1rem", marginRight: "1rem" }} color="warning" startIcon={<LikeIcon />} 
-                    variant={lstate.clikes.find(x=>x.customerId ===ustate.user.id) ? "contained":"outlined"}
+                    variant={lstate.likes.find(x=>x.customerId ===ustate.user.userId) ? "contained":"outlined"}
                     onClick={()=>handleLike()}
                     >Like</Button>
 

@@ -51,7 +51,11 @@ export const deleteLike = (id) => async dispatch => {
 
     console.log("actiondan geldi", id)
 
-    await axios.delete(`http://localhost:8080/like/${id}`)
+    await axios.delete(`http://localhost:8080/like/${id}`,{
+        headers: {
+            "Authorization": localStorage.getItem("tokenKey")
+        }
+    })
     // console.log("actiondan gelen value",res)
     dispatch({
         type: "DELETE_LIKE",

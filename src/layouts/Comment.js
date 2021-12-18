@@ -29,13 +29,15 @@ export default function Comment() {
   const open = Boolean(anchorEl);
   const handleClick = (event,id) => {
     setAnchorEl(event.currentTarget);
-    console.log("event",event)
+    //console.log("event",event)
     setedited(id)
     
    
   };
 
   console.log("state: ",edited)
+
+  console.log("deneme",edited.customerId !== 1)
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -77,7 +79,9 @@ export default function Comment() {
             </IconButton>
           </CardActions>
 
-          <DropdownMenu open={open} data={edited} handleClose={handleClose} anchorEl={anchorEl} />
+          {edited.customerId != localStorage.getItem("currenUser")
+          ? "" : <DropdownMenu open={open} data={edited} handleClose={handleClose} anchorEl={anchorEl} /> }
+          
 
         </Card>
       ))}

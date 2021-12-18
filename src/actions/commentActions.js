@@ -16,7 +16,11 @@ export const getAllComments=(restaurantid,customerid)=>async dispatch=>{
 
 export const createComment=(value)=>async dispatch=>{
     
-   const posts = await axios.post("http://localhost:8080/comment",value).catch(e=>console.log("error message :",e.message))
+   const posts = await axios.post("http://localhost:8080/comment",value,{
+    headers: {
+        "Authorization": localStorage.getItem("tokenKey")
+    }
+}).catch(e=>console.log("error message :",e.message))
 
     console.log("actiondan gelen",value);
 
@@ -27,7 +31,11 @@ export const createComment=(value)=>async dispatch=>{
 }
 
 export const editComment=(value,id)=>async dispatch=>{
-   const posts = await axios.put(`http://localhost:8080/comment/${id}`,value)
+   const posts = await axios.put(`http://localhost:8080/comment/${id}`,value,{
+    headers: {
+        "Authorization": localStorage.getItem("tokenKey")
+    }
+})
 
     //console.log("actiondan gelen",value,id);
 
@@ -42,7 +50,11 @@ export const deleteComment=(id)=>async dispatch=>{
     
     //console.log("actiondan geldi",id)
 
-    const res = await axios.delete(`http://localhost:8080/comment/${id}`)
+    const res = await axios.delete(`http://localhost:8080/comment/${id}`,{
+        headers: {
+            "Authorization": localStorage.getItem("tokenKey")
+        }
+    })
    
     dispatch({
         type : "DELETE_COMMENT",

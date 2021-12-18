@@ -7,7 +7,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { Divider, Input } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { Field, Form, Formik } from 'formik';
-import { createComment } from '../actions/commentActions';
+import { createComment, getAllComments } from '../actions/commentActions';
 
 
 const style = {
@@ -33,10 +33,11 @@ function CommentModal(props) {
         
     }
 
+    const customerid =localStorage.getItem("currenUser")
     const initialValues = {
     
         text: "",
-        customerid: 1,
+        customerid: customerid,
         restaurantid: state.cafe.id
     }
 
@@ -49,6 +50,7 @@ function CommentModal(props) {
         console.log(val)
         dispatch(createComment(val))
         props.handleClose();
+        dispatch(getAllComments(state.cafe.id))
     }
     return (
         <div>
