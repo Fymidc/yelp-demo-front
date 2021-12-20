@@ -93,7 +93,7 @@ function LandingHeader() {
             <h1>My <b>Coffee</b> Place</h1>
 
             <div>
-                <h3>Hi Fatih</h3>
+                <h3>Hi {localStorage.getItem("userName")}</h3>
                 <h3>Have you had coffee?</h3>
             </div>
 

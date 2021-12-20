@@ -17,6 +17,7 @@ import Loggedin from './Loggedin';
 import LoggedOut from './LoggedOut';
 import { useNavigate } from 'react-router-dom';
 //import Logout from '@material-ui/icons/Logout';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 export default function NavWithSearch() {
@@ -67,9 +68,10 @@ export default function NavWithSearch() {
                     <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                         <Typography sx={{ minWidth: 100, cursor: "pointer" }}>Contact</Typography>
                         <Typography sx={{ minWidth: 100, cursor: "pointer" }}>Profile</Typography>
-                        <Tooltip title="Account settings">
+                        <Tooltip title="Account">
                             <IconButton className="user-icon-other" onClick={handleClick} size="small" >
-                                <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                               
+                                <AccountCircleIcon fontSize="large" />
                             </IconButton>
                         </Tooltip>
                     </Box>

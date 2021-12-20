@@ -21,12 +21,13 @@ import Nav from '../layouts/Nav';
 import CommentModal from '../layouts/CommentModal';
 import { createLike, deleteLike, getAllLikes, getCustomerLikes } from '../actions/likeActions';
 import { getAllComments } from '../actions/commentActions';
+import { useNavigate } from 'react-router-dom';
 
 
 
 function SingleShop() {
 
-    
+
 
     const state = useSelector(state => state.cafe)
     const lstate = useSelector(state => state.like)
@@ -35,48 +36,61 @@ function SingleShop() {
 
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const customerid = ustate.user.id
     const restaurantid = state.cafe.id
 
     useEffect(() => {
-        
-        dispatch(getCustomerLikes(customerid,restaurantid))
+
+        dispatch(getCustomerLikes(customerid, restaurantid))
         dispatch(getOneCafeById());
-    }, [lstate.clikes.length,lstate.likes])
+    }, [lstate.clikes.length, lstate.likes])
 
 
     const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+    const handleOpen = () => {
+        if (localStorage.getItem("currenUser") !== null) {
+            setOpen(true)
 
-  const handleLike=()=>{
-      const [id] = lstate.clikes.slice(-1);
+        }else{
+            setOpen(false)
+        navigate("/login") 
+        }
+       
+
+    };
+    const handleClose = () => setOpen(false);
+
+    const handleLike = () => {
+        const [id] = lstate.clikes.slice(-1);
         const customerid = localStorage.getItem("currenUser")
         const restaurantid = state.cafe.id
-   
 
-      if(lstate.clikes.length===0){
-        dispatch(createLike(customerid,restaurantid))
+        if (localStorage.getItem("currenUser") != null) {
+            if (lstate.clikes.length === 0) {
+                dispatch(createLike(customerid, restaurantid))
 
-      }else{
-        dispatch(deleteLike(id.id))
-      }
+            } else {
+                dispatch(deleteLike(id.id))
+            }
 
-      
-  }
+        }else{
+            navigate("/login")
+        }
+        
 
-  //un auth iken comment create button açılmasın login page yönlendir
-  //un auth iken like atılmasın /login page yönlendir
-  
-    
+
+
+    }
+
 
     return (
         <div>
-            <div style={{marginTop:"1rem"}}>
-              <Nav/>  
+            <div style={{ marginTop: "1rem" }}>
+                <Nav />
             </div>
-            
+
             <div className="single-shop" >
                 <div className="single-shop-imgs">
                     {state.cafe.images ? state.cafe.images.map(i => (
@@ -91,10 +105,10 @@ function SingleShop() {
 
             <div >
                 <div style={{ marginLeft: "5rem", textAlign: "left" }} >
-                    <Button style={{ marginTop: "1rem", marginRight: "1rem" }} color="warning" startIcon={<StarIcon />} onClick={()=>handleOpen()} variant="outlined">Write a Review</Button>
-                    <Button style={{ marginTop: "1rem", marginRight: "1rem" }} color="warning" startIcon={<LikeIcon />} 
-                    variant={lstate.likes.find(x=>x.customerId ===ustate.user.userId) ? "contained":"outlined"}
-                    onClick={()=>handleLike()}
+                    <Button style={{ marginTop: "1rem", marginRight: "1rem" }} color="warning" startIcon={<StarIcon />} onClick={() => handleOpen()} variant="outlined">Write a Review</Button>
+                    <Button style={{ marginTop: "1rem", marginRight: "1rem" }} color="warning" startIcon={<LikeIcon />}
+                        variant={lstate.likes.find(x => x.customerId === ustate.user.userId) ? "contained" : "outlined"}
+                        onClick={() => handleLike()}
                     >Like</Button>
 
                     <Button style={{ marginTop: "1rem", marginRight: "1rem" }} color="warning" startIcon={<BookmarkIcon />} variant="outlined">Save</Button>
@@ -117,7 +131,7 @@ function SingleShop() {
 
                         </div>
 
-                        <div style={{display:"flex",flexDirection:"column",justifyContent:"center"}} >
+                        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }} >
                             <Typography sx={{ padding: "1rem" }} >
                                 Menu
                             </Typography>
@@ -210,7 +224,7 @@ function SingleShopBox(props) {
                                 {props.state.cafe.restaurantName}
                             </Typography>
                             <Typography sx={{ fontWeight: "bold" }} variant="body1" component="div">
-                                {state.likes.length} <FavoriteBorderIcon style={{position:"absolute",marginLeft:"0.5rem",color:"red"}} />
+                                {state.likes.length} <FavoriteBorderIcon style={{ position: "absolute", marginLeft: "0.5rem", color: "red" }} />
                             </Typography>
                             <Typography sx={{ fontWeight: "bold", cursor: 'pointer' }} variant="body1" gutterBottom>
                                 {props.state.cafe.info}
