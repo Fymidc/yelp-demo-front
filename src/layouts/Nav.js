@@ -61,7 +61,7 @@ export default function Nav() {
                 <Typography sx={{ minWidth: 100 , cursor:"pointer" }}>Profile</Typography>
                 <Tooltip title="Account">
                     <IconButton className="user-icon" onClick={handleClick} size="small" >
-                    <AccountCircleIcon fontSize="large" style={{color:"white"}} />
+                    <AccountCircleIcon fontSize="large" style={{color:path==="/"?"white":""}} />
                     </IconButton>
                 </Tooltip>
             </Box>

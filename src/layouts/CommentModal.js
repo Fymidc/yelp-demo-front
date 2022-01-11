@@ -45,6 +45,7 @@ function CommentModal(props) {
 
     const dispatch = useDispatch();
 
+
     const submitComment = (val) => {
         
         console.log(val)

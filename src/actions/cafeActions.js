@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const getAllCafes=()=>async dispatch=>{
-    const posts = await axios.get("http://localhost:8080/restaurant")
+    const posts = await axios.get("https://hidden-fjord-84882.herokuapp.com/restaurant")
 
     dispatch({
         type : "GET_ALL_CAFE",
@@ -10,7 +10,7 @@ export const getAllCafes=()=>async dispatch=>{
 }
 
 export const getCheckedCafes=()=>async dispatch=>{
-    const posts = await axios.get("http://localhost:8080/restaurant")
+    const posts = await axios.get("https://hidden-fjord-84882.herokuapp.com/restaurant")
     
    // console.log("actiondan gelen checked: ",ischecked)
     dispatch({
@@ -20,7 +20,7 @@ export const getCheckedCafes=()=>async dispatch=>{
 }
 
 export const getOneCafeById=(id)=>async dispatch=>{
-    const posts = await axios.get(`http://localhost:8080/restaurant/${id}`)
+    const posts = await axios.get(`https://hidden-fjord-84882.herokuapp.com/restaurant/${id}`)
 
     dispatch({
         type : "GET_ONE_CAFE",
@@ -29,7 +29,7 @@ export const getOneCafeById=(id)=>async dispatch=>{
 }
 
 export const getCafeNameContains=(input)=>async dispatch=>{
-    const posts = await axios.get(`http://localhost:8080/restaurant/cn/${input}`)
+    const posts = await axios.get(`https://hidden-fjord-84882.herokuapp.com/restaurant/cn/${input}`)
 
     console.log("contains action",posts.data)
 

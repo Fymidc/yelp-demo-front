@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getOneUser=(id)=>async dispatch=>{
 
-    const user= await axios.get(`http://localhost:8080/customer/${id}`)
+    const user= await axios.get(`https://hidden-fjord-84882.herokuapp.com/customer/${id}`)
     
     dispatch ({
         type:"GET_ONE_USER",
@@ -12,7 +12,10 @@ export const getOneUser=(id)=>async dispatch=>{
 
 export const loginUser=(val)=>async dispatch=>{
 
-    const user= await axios.post("http://localhost:8080/auth/login",val)
+    const user= await axios.post("https://hidden-fjord-84882.herokuapp.com/auth/login",val,
+    {
+        credentials: 'same-origin'
+    })
     
     console.log("loginden gelen: ",user)
     console.log("loginden gelen: ",val.userName)

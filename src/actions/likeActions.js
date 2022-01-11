@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const getAllLikes = (restaurantid, customerid) => async dispatch => {
-    const posts = await axios.get(`http://localhost:8080/like?restaurantid=${restaurantid}`)
+    const posts = await axios.get(`https://hidden-fjord-84882.herokuapp.com/like?restaurantid=${restaurantid}`)
 
     console.log("likes", restaurantid);
     // console.log("customerid",customerid,"restaurantid",restaurantid);
@@ -13,7 +13,7 @@ export const getAllLikes = (restaurantid, customerid) => async dispatch => {
 }
 
 export const getCustomerLikes = (customerid, restaurantid) => async dispatch => {
-    const posts = await axios.get(`http://localhost:8080/like?customerid=${customerid}&restaurantid=${restaurantid}`)
+    const posts = await axios.get(`https://hidden-fjord-84882.herokuapp.com/like?customerid=${customerid}&restaurantid=${restaurantid}`)
 
     console.log("likes:cid", customerid, "rid:", restaurantid);
     // console.log("customerid",customerid,"restaurantid",restaurantid);
@@ -34,7 +34,7 @@ export const createLike = (customerid, restaurantid) => async dispatch => {
         customerid: customerid,
     }
 
-    const res = await axios.post("http://localhost:8080/like", data, {
+    const res = await axios.post("https://hidden-fjord-84882.herokuapp.com/like", data, {
         headers: {
             "Authorization": localStorage.getItem("tokenKey")
         }
@@ -51,7 +51,7 @@ export const deleteLike = (id) => async dispatch => {
 
     console.log("actiondan geldi", id)
 
-    await axios.delete(`http://localhost:8080/like/${id}`,{
+    await axios.delete(`https://hidden-fjord-84882.herokuapp.com/like/${id}`,{
         headers: {
             "Authorization": localStorage.getItem("tokenKey")
         }

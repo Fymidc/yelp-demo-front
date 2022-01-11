@@ -16,7 +16,14 @@ function App() {
   useEffect(() => {
     dispatch(getAllCafes());
     dispatch(getOneUser(userid))
+    
   }, [])
+
+  const path = window.location.pathname;
+
+  useEffect(() => {
+    window.scrollTo(0, 0)  
+  }, [path])
 
 
   return (

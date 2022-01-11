@@ -62,6 +62,8 @@ function SingleShop() {
     };
     const handleClose = () => setOpen(false);
 
+    console.log("token :" , localStorage.getItem("tokenKey"))
+
     const handleLike = () => {
         const [id] = lstate.clikes.slice(-1);
         const customerid = localStorage.getItem("currenUser")
@@ -107,7 +109,7 @@ function SingleShop() {
                 <div style={{ marginLeft: "5rem", textAlign: "left" }} >
                     <Button style={{ marginTop: "1rem", marginRight: "1rem" }} color="warning" startIcon={<StarIcon />} onClick={() => handleOpen()} variant="outlined">Write a Review</Button>
                     <Button style={{ marginTop: "1rem", marginRight: "1rem" }} color="warning" startIcon={<LikeIcon />}
-                        variant={lstate.likes.find(x => x.customerId === ustate.user.userId) ? "contained" : "outlined"}
+                        variant={lstate.likes.find(x => x.customerId === ustate.user.id) ? "contained" : "outlined"}
                         onClick={() => handleLike()}
                     >Like</Button>
 
