@@ -34,7 +34,7 @@ function LandingPage() {
         const capitalisedInput = input.toLowerCase().replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase())
         dispatch(getCafeNameContains(capitalisedInput))
         console.log("deneme: ", capitalisedInput)
-        ev.preventDefault();
+        //ev.preventDefault();
         navigate("/shops")
 
     }
