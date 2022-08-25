@@ -20,7 +20,7 @@ import { getOneCafeById } from '../actions/cafeActions';
 import Nav from '../layouts/Nav';
 import CommentModal from '../layouts/CommentModal';
 import { createLike, deleteLike, getAllLikes, getCustomerLikes } from '../actions/likeActions';
-import { getAllComments } from '../actions/commentActions';
+
 import { useNavigate } from 'react-router-dom';
 
 
@@ -32,7 +32,7 @@ function SingleShop() {
     const state = useSelector(state => state.cafe)
     const lstate = useSelector(state => state.like)
     const ustate = useSelector(state => state.user)
-    const comment = useSelector(state => state.comment)
+  
 
 
     const dispatch = useDispatch();
@@ -219,7 +219,7 @@ function SingleShopBox(props) {
         <Paper sx={{ boxShadow: "none", color: "white", backgroundColor: "transparent", p: 2, padding: "2rem", margin: 'auto', marginTop: "11rem", maxWidth: 500, flexGrow: 1 }}>
             <Grid container spacing={2}>
 
-                <Grid item xs={12} xs container sx={{ fontWeight: "bold", textAlign: "left" }} >
+                <Grid item xs={12}  container sx={{ fontWeight: "bold", textAlign: "left" }} >
                     <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
                             <Typography sx={{ fontWeight: "bold" }} gutterBottom variant="h3" component="div">

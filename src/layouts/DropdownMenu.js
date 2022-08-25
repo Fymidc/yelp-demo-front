@@ -14,7 +14,7 @@ function DropdownMenu(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const state = useSelector(state => state.comment)
+  
 
   const dispatch = useDispatch()
 

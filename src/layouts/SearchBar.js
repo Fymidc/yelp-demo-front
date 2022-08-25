@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import SearchIcon from '@mui/icons-material/Search'
 import { IconButton, InputAdornment } from '@mui/material';
-import { useNavigate } from 'react-router-dom'
+
 import { useDispatch } from 'react-redux';
 import { getCafeNameContains } from '../actions/cafeActions';
 

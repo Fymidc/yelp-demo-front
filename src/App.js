@@ -4,11 +4,10 @@ import { getAllCafes } from './actions/cafeActions';
 import { getOneUser } from './actions/userActions';
 import './App.css';
 import Dashboard from './layouts/Dashboard';
-import Nav from './layouts/Nav';
+
 
 function App() {
 
-  const state = useSelector(state => state.cafe)
   const dispatch = useDispatch();
 
   const userid= localStorage.getItem("currenUser");

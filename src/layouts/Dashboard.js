@@ -2,14 +2,12 @@ import React from 'react'
 import LandingPage from '../pages/LandingPage'
 import ShopsList from '../pages/ShopsList'
 import SingleShop from '../pages/SingleShop'
-import Nav from './Nav'
-import NavWithSearch from './NavWithSearch'
+
 import {
     BrowserRouter as Router,
     Routes,
     Route,
 
-    Link
 } from "react-router-dom";
 import LogInPage from '../pages/LogInPage'
 import SignUpPage from '../pages/SignUpPage'

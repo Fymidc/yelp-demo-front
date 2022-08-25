@@ -99,6 +99,3 @@ function CommentModal(props) {
 
 export default CommentModal
 
-// <Button style={{ marginTop: "1rem", marginRight: "1rem" }} color="warning" startIcon={<SendIcon />} variant="outlined">Send</Button>
-//         <Button style={{ marginTop: "1rem", marginRight: "1rem" }} color="warning" startIcon={<CloseIcon />} variant="outlined">Cancel</Button>
-//         <TextField id="standard-basic" label="Standard" variant="Write a review..." />

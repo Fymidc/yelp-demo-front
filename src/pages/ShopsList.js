@@ -9,7 +9,7 @@ import { Divider } from '@mui/material';
 import ShopIcon from '@mui/icons-material/Shop';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { getAllCafes, getCafeNameContains, getOneCafeById } from '../actions/cafeActions';
+import {  getOneCafeById } from '../actions/cafeActions';
 
 import { useNavigate } from 'react-router-dom';
 import NavWithSearch from '../layouts/NavWithSearch';
@@ -31,19 +31,19 @@ function ShopsList() {
    
 
 
-    const dispatch = useDispatch();
-
    
+
+   const length = state.cafes.length
 
     useEffect(() => {
 
-        if (state.cafes.length === 1) {
+        if (length=== 1) {
 
-        } else if (state.cafes.length === 0) {
-            // dispatch(getAllCafes());
+        } else if (length=== 0) {
+            
             
         }
-    }, [state.cafes.length === 0])
+    }, [length=== 0])
 
     return (
         <div>
@@ -111,7 +111,7 @@ function Shops(props) {
                         <Img alt="complex" src={props.cafe.images ? props.cafe.images[0] : ""} />
                     </ButtonBase>
                 </Grid>
-                <Grid item xs={12} xs container sx={{ textAlign: "left" }} >
+                <Grid item xs={12}  container sx={{ textAlign: "left" }} >
                     <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
                             <Typography onClick={() => handleCafeById(props.id)} sx={{ cursor: 'pointer' }} gutterBottom variant="h5" component="div">

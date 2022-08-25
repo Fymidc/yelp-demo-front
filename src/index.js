@@ -7,7 +7,7 @@ import store from './store';
 import { Provider } from 'react-redux';
 
 
-const path = window.location.pathname;
+
 
 ReactDOM.render(
   <Provider store={store} >

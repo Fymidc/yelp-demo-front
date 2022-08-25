@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import SearchBar from '../layouts/SearchBar'
+
 import MyButton from '../layouts/MyButton'
 import SearchIcon from '@mui/icons-material/Search'
 import { useDispatch } from 'react-redux';
-import { getAllCafes, getCafeNameContains } from '../actions/cafeActions';
+import { getCafeNameContains } from '../actions/cafeActions';
 import { useNavigate } from 'react-router';
 import { IconButton, InputAdornment, Stack, TextField } from '@mui/material';
 import Nav from '../layouts/Nav';

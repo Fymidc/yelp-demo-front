@@ -8,14 +8,10 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ListItemIcon from '@mui/material/ListItemIcon';
 
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useSelector } from 'react-redux';
-import { Menu, MenuItem } from '@mui/material';
+
 import DropdownMenu from './DropdownMenu';
 
 
@@ -79,7 +75,7 @@ export default function Comment() {
             </IconButton>
           </CardActions>
 
-          {edited.customerId != localStorage.getItem("currenUser")
+          {edited.customerId !== localStorage.getItem("currenUser")
           ? "" : <DropdownMenu open={open} data={edited} handleClose={handleClose} anchorEl={anchorEl} /> }
           
 
